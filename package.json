@@ -35,5 +35,6 @@
     },
     "prettier": {
         "singleQuote": true
-    }
+    },
+    "private": false
 }
