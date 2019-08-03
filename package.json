@@ -1,6 +1,6 @@
 {
     "name": "@roopendra/feathers-validator",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Opinionated schema validator hook to be used with Feathers JS framework",
     "main": "src/validator.js",
     "scripts": {

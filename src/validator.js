@@ -52,7 +52,7 @@ function schemaValidator(allSchemas, serviceName, ajv) {
                 return isFunction(schema) ? schema(context, isSelf) : schema;
             }));
 
-            const schema = resolvedSchemas.reduce((result, schema) => {
+            let schema = resolvedSchemas.reduce((result, schema) => {
                 if (!schema) {
                     return result;
                 }
@@ -62,9 +62,13 @@ function schemaValidator(allSchemas, serviceName, ajv) {
                 );
             }, {});
 
-            validator = ajv.compile(schema);
 
-            if (!isEmpty(schema) && validator) {
+            if (!isEmpty(schema)) {
+
+                // fixes async in sync schema error
+                schema = deepmerge(schema, { "$async": true });
+                validator = ajv.compile(schema);
+
                 try {
                     if (method === 'find' && type === 'after') {
                         const length = result.data.length;
